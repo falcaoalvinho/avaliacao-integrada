@@ -1,59 +1,77 @@
+import { useEffect, useState } from "react";
+
 import { ContentTable } from "./components/ContentTable";
 import TableHeader from "./components/TableHeader";
 import Title from "./components/Title.js"
 import SubTitle from "./components/SubTitle.js"
+import { TableRow } from "./components/TableRow.js";
 
 function App() {
-  return (
-    <div>
+  const[Motos, setMotos] = useState([])
+  
+  const URL = 'http://localhost:8080/moto';
+  
+  function GetMotos(){
+    fetch(URL, {method: 'GET'})
+    .then((response) => response.json())
+    .then(json => {
+      setMotos(json)
+    })
+  }
+
+  function UpdateMoto(ID, Modelo, Marca, Ano) {
+    setMotos(prevMotos => {
+      prevMotos.map(Moto => {
+        Moto.id === ID ? {'modelo': Modelo, 'marca': Marca, 'ano': Ano} : Moto
+        }
+      console.log(Moto)
+      )}
+    )
+  }
+
+  function DeleteMoto(ID) {
+    setMotos(prevMotos => {
+      prevMotos.map(Moto => {
+      console.log(ID)
+      Moto.id !== ID
+      }
+    )}
+    )
+  }
+
+  // const addMoto = () => {
+    
+  // }
+
+return (
+  <div>
       <Title>avaliacao-integrada</Title>
       <SubTitle>CRUD para uma garagem de motos</SubTitle>
 
       <ContentTable
-        Children={(  
-          <TableHeader/>
+        Header={(<TableHeader/>)}
+      Body={(
+        <tbody>
+            {Motos.map((Moto, Index) => 
+              (<TableRow 
+                key={Index}
+                ID={Moto.id}
+                Marca={Moto.marca}
+                Modelo={Moto.modelo}
+                Ano={Moto.ano}
+                Update={UpdateMoto(Index, Moto.Modelo, Moto.Marca, Moto.ano)}
+                Delete={DeleteMoto(Index)}
+              />)
+            )}
+          </tbody>
         )}
       />
-        {/* <tbody>
-
-        </tbody> */}
+      <div style={{display: 'flex',flexDirection: 'row', gap: 30}}>
+        <button onClick={GetMotos}>Gerar Tabela</button>
+        <button >Novo Registro</button>
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
-
-
-// Objeto Moto = {modelo, marca, ano}
-
-// /* Margem para Títilo do projeto (tag 'h1") */
-// h1 {
-//   margin: 0px 0px 30px 0px ;
-// }
-
-// /* Definição do estilo da borda para a tabela */
-// table, th, td {
-//   border-style: solid;
-//   border-width: 1px;
-//   border-color: var(--CinzaClaro2);
-//   border-collapse:collapse;
-// }
-
-// /* Sombra de caixa para Tabela e Botões do Projeto*/
-// table, button{
-//   box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 30px;
-// }
-
-// /* Estilização das fontes dentro do cabeçalho e corpo da tabela (tags 'th' e 'td') */
-// th, td {
-//   padding: 15px;
-
-//   font-weight: 500;
-//   font-size: 20px;
-//   color: var(--Branco);
-// }
-
-// /* Mudança de cor para blocos do cabeçalho */
-// th {
-//   background-color: var(--Preto);
-// }

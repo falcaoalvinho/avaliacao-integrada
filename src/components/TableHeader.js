@@ -26,9 +26,7 @@ export default function TableHeader({}) {
     return (
         <Header>
             <tr>
-                <Column>
-
-                </Column>
+                <Column/>
                 <Column>
                     <p>Modelo</p>
                 </Column>
@@ -38,6 +36,8 @@ export default function TableHeader({}) {
                 <Column>
                     <p>Ano</p>
                 </Column>
+                <Column/>
+                <Column/>
             </tr>
         </Header>
     )

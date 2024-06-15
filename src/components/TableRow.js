@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+import BaseButton from "./BaseButton.js";
+import Input from './Input.js'
+
 export const Cell = styled.td`
     border-style: solid;
     border-width: 1px;
@@ -19,29 +22,26 @@ export const Row = styled.tr`
     color: #fff;
 `;
 
-export function Input({Value, Type }){
-    return(
-        <input style={{border: 'none'}} value={}>
-            <p style={{color: "#fff",}}></p>
-        </input>
-    )
-}
-
-
-export default TableRow(props){
+export function TableRow({ID, Modelo, Marca, Ano, onChange, Update, Delete}){
     return(
         <Row>
             <Cell>
-                <p>{props.ID}</p>
+                <p>{ID}</p>
             </Cell>
             <Cell>
-                <Input>{props.Modelo}</Input>
+                <Input onChange={() => onChange} Value={Modelo} Type='text'/>
             </Cell>
             <Cell>
-                <Input>{props.Marca}</Input>
+                <Input onChange={() => onChange} Value={Marca} Type='text'/>
             </Cell>
             <Cell>
-                <Input>{props.Ano}</Input>
+                <Input onChange={() => onChange} Value={Ano} Type='number'/>
+            </Cell>
+            <Cell>
+                <BaseButton Update={Update} Text='Atualizar'/>
+            </Cell>
+            <Cell>
+                <BaseButton Delete={Delete} Text='Excluir'/>
             </Cell>
         </Row>
     )

@@ -72,11 +72,11 @@ button {
     border-color: var(--CinzaClaro2);
     border-radius: 10px;
 
+    background-color: var(--Preto);
+
     font-size: 16px;
     font-weight: 600;
-    color: var(--CinzaClaro2);
-
-    background-color: var(--Preto);
+    color: var(--Branco);
 }
 
 /* Estilização da Lista de botões */
@@ -89,12 +89,6 @@ ul {
     gap: 30px;
 
     list-style: none;
-}
-
-/* Estilização dos butões de dentro da tabela */
-table button {
-    color: var(--Branco);
-    background-color: var(--Vermelho);
 }
 
 /* Estilização das Itens de Lista para listas da Div de gestão da Tabela */
